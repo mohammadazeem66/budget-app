@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+  
+  .maincontainer{
+    background-image:linear-gradient(#fff, rgb(0, 132, 255)) ;
+    border: 2px black solid;
+    height: 1000px;
+    padding: 8px;
+    text-align: center;
+    border-style: none;
+    border-style: none;
+
+  }
+  #maintitle1{
+    color: rgb(40, 173, 250);
+  }
+  
+  #maintitle2{
+    color: rgb(60, 60, 242);
+  }
+  .raw1{
+
+    border: 1px black solid;
+    height: 350px;
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-style: none;
+  }
+ 
+  .budget{
+    border: 1px black solid;
+    height: 250px;
+    width: 300px;
+   margin-right: 50px;
+   /* padding-top: 60px; */
+   border-radius: 15px;
+   background-color: rgb(148, 231, 248);
+   border-style: none;
+   
+  }
+
+  #bdgt, #title{
+    color: rgb(155, 155, 155);
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    padding: 7px 5px;
+    margin-bottom: 10px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    margin-top: 30px;
+    border-style: none;
+}
+#cost{
+    color: rgb(155, 155, 155);
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    padding: 7px 5px;
+    margin-bottom: 10px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    margin-top: 6px; 
+}
+
+  #bdgtbtn, #expbtn{
+    width: 180px;
+    padding: 7px;
+    margin-top: 8px;
+    border-radius: 10px;
+  }
+
+  #expbtn{
+    width: 180px;
+    padding: 7px;
+    margin-top: 10px;
+  }
+  .expenses{
+    border: 1px black solid;
+    height: 250px;
+    width: 300px;
+    margin-left: 50px;
+    border-radius: 15px;
+    background-color: rgb(148, 231, 248);
+   border-style: none;
+  }
+  
+
+  .raw2{
+
+    border: 1px black solid;
+    height: 150px;
+    margin-top: 10px;
+    display: flex;
+    gap: 270px;
+    padding: 5px 8px 5px 30px;
+    background-color: rgb(148, 231, 248);
+   border-style: none;
+  }
+  #bud, #exp, #bal{
+    text-align: center;  
+  }
+
+
+
+  .raw3{
+    border: 1px black solid;
+    height: 200px;
+    margin-top: 30px;
+    text-align: center;
+    background-color: rgb(148, 231, 248);
+   border-style: none;
+  }
+  .myRow{
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+
+
+    </style>
+</head>
+<body>
+    
+
+    
+    <div class="maincontainer">
+
+        <h1 id="maintitle1">BUDGET <span id="maintitle2">APP</span></h1>
+
+        <div class="raw1">
+            
+              <div class="budget">
+                   <h2 class="budgetheading"> BUDGET</h2>
+                   <input type="txt" id="bdgt" placeholder="Enter Budget"> <br>
+                   <button id="bdgtbtn" onclick="addBudget()">Budget</button>
+
+              </div>
+
+              <div class="expenses">
+                <h2 class="expenseheading"> EXPENSE </h2>
+                   <input type="txt" id="title" placeholder="Enter Title"> <br>
+                   <input type="txt" id="cost" placeholder="Enter Cost"> <br>
+                   <button id="expbtn" onclick="addExpense()">Check</button>
+
+              </div>
+        </div>
+
+
+        <div class="raw2">
+            
+
+            <div class="totalbudget">
+                <h2>Total Budget</h2>
+                <p id="bud"> 0 </p>
+            </div>
+
+            <div class="totalexpense">
+                <h2>Total Expense</h2>
+                <p id="exp"> 0 </p>
+            </div>
+
+            <div class="balance">
+                <h2>Balance</h2>
+                <p id="bal"> 0 </p>
+            </div>
+
+
+        </div>
+
+        <div class="raw3">
+            <h2>Expense List</h2>
+            <div class="expense-list" id="resltlist">
+                
+
+            </div>
+
+        </div>
+
+
+    </div>
+  
+
+
+
+    <script>
+  
+
+  let countBalnc = 0;
+  
+        // BUDGET FORM
+        function addBudget() {
+           document.getElementById("bud").innerText  = document.getElementById("bdgt").value;
+        }
+
+// EXPENSE FORM
+function addExpense() {
+    let a = document.getElementById("title").value;
+    let b = document.getElementById("cost").value;
+    localStorage.setItem(a, b);
+    let div1 = document.querySelector(".expense-list");
+    let table = document.createElement("table");
+    let row = document.createElement("tr");
+    row.setAttribute("class", "myRow");
+    table.appendChild(row);
+    div1.appendChild(table);
+    let col1 = document.createElement("td");
+    let col2 = document.createElement("td");
+    let col3 = document.createElement("td");
+    let btn = document.createElement("button");
+
+  
+    btn.appendChild(document.createTextNode("delete"));
+    col1.appendChild(document.createTextNode(a));
+    col2.appendChild(document.createTextNode(localStorage.getItem(a)));
+    col3.appendChild(btn);
+    row.appendChild(col1);
+    row.appendChild(col2);
+    row.appendChild(col3);
+
+
+
+    document.getElementById("exp").innerText = localStorage.getItem(a);
+
+    countBalnc = countBalnc + +b;
+    document.getElementById("bal").innerText = document.getElementById("bdgt").value - countBalnc;
+
+    btn.addEventListener("click", function (){
+            let myOldRow = row;
+           row.remove();
+           document.getElementById("bal").innerText = document.getElementById("bdgt").value - document.getElementById("exp").innerText ;
+         console.log(countBalnc);
+    
+        })
+}
+
+    </script>
+
+</body>
+</html>
